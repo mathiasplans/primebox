@@ -19,7 +19,7 @@ uint64_t tiss_size(uint16_t alphabet_size, uint8_t max_word_size) {
   uint64_t sum = 0;
   uint64_t coef = 1;
   for (uint8_t i = 0; i < max_word_size; ++i) {
-    sum += (alphabet_size - 1) * coef;
+    sum += (alphabet_size) * coef;
 
     coef *= alphabet_size;
   }
@@ -50,7 +50,7 @@ uint64_t tiss_key(std::string word, std::map<char, uint8_t> alpha) {
   uint64_t key = 0;
   uint64_t coef = 1;
   for (uint8_t i = 0; i < word.size(); ++i) {
-    key += coef * alpha[word[i]];
+    key += coef * (alpha[word[i]] + 1);
     coef *= alpha.size();
   }
 
@@ -133,8 +133,8 @@ void maxindices() {
   auto english = get_alphabet("abcdefghijklmnopqrstuvwxyz");
   auto dna = get_alphabet("actg");
 
-  //uint64_t max4GiB = 4294967296;
-  uint64_t max4GiB = 9223372036854775808UL;
+  uint64_t max4GiB = 4294967296;
+  //uint64_t max4GiB = 9223372036854775808UL;
 
   uint8_t i = 1;
   uint64_t size = 0;
@@ -174,10 +174,10 @@ void genes() {
 }
 
 int main() {
-  //keyspace1(6);
-  //keyspace2(6);
+  keyspace1(6);
+  keyspace2(6);
   //keygen(100000, 4, 6);
   //maxindices();
-  genes();
+  //genes();
   return 0;
 }
